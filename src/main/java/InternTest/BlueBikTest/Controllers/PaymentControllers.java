@@ -36,9 +36,14 @@ public class PaymentControllers {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int limit
     ) {
-        Sort.Direction direction = order.equalsIgnoreCase("desc")
-                ? Sort.Direction.DESC
-                : Sort.Direction.ASC;
+
+        Sort.Direction direction;
+        if (order.equalsIgnoreCase("desc")) {
+            direction = Sort.Direction.DESC;
+        } else {
+            direction = Sort.Direction.ASC;
+        }
+
 
         Pageable pageable = PageRequest.of(page, limit, Sort.by(direction, sortBy));
 
