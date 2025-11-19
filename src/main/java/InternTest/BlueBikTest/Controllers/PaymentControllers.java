@@ -23,12 +23,6 @@ public class PaymentControllers {
         this._paymentService = _paymentService;
     }
 
-
-//    @GetMapping(value = "/", params = "customerName")
-//    public List<Payments> getByCustomerName(@RequestParam String customerName) {
-//        return _paymentService.getCustomerName(customerName);
-//    }
-
     @GetMapping("/")
     public Page<Payments> getPayments(
             @RequestParam (required = false) String customerName,

@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface IPaymentService {
 
-    //List<Payments> getCustomerName(String customerName);
+
     Page<Payments> getPayments (Pageable pageable);
     Page<Payments> searchByCustomerName(String customerName,Pageable pageable);
 

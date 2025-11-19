@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import InternTest.BlueBikTest.repositories.PaymentRepositories;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+
 
 @Transactional(readOnly = true)
 @Service
@@ -19,11 +19,6 @@ public class PaymentService implements IPaymentService {
         this._paymentRepositories = _paymentRepositories;
     }
 
-//    @Override
-//    @Transactional
-//    public List<Payments> getCustomerName(String customerName) {
-//        return _paymentRepositories.findByCustomerName(customerName);
-//    }
 
     @Override
     public Page<Payments> getPayments(Pageable pageable) {

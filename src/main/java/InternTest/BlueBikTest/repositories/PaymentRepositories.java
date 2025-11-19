@@ -14,7 +14,6 @@ import java.util.Optional;
 
 @Repository
 public interface PaymentRepositories extends JpaRepository<Payments,String> {
-    //List<Payments> findByCustomerName(String customerName);
     Page<Payments> findAll(Pageable pageable);
     Page<Payments> findByCustomerNameContainingIgnoreCase(String customerName,Pageable pageable);
 }
