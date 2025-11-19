@@ -24,13 +24,14 @@ public class PaymentControllers {
     }
 
 
-    @GetMapping(value = "/", params = "customerName")
-    public Payments getByCustomerName(@RequestParam String customerName) {
-        return _paymentService.getCustomerName(customerName);
-    }
+//    @GetMapping(value = "/", params = "customerName")
+//    public List<Payments> getByCustomerName(@RequestParam String customerName) {
+//        return _paymentService.getCustomerName(customerName);
+//    }
 
     @GetMapping("/")
     public Page<Payments> getPayments(
+            @RequestParam (required = false) String customerName,
             @RequestParam(defaultValue = "date") String sortBy,   //date , amount
             @RequestParam(defaultValue = "asc") String order,     //asc ,desc
             @RequestParam(defaultValue = "0") int page,
@@ -44,23 +45,18 @@ public class PaymentControllers {
             direction = Sort.Direction.ASC;
         }
 
-
         Pageable pageable = PageRequest.of(page, limit, Sort.by(direction, sortBy));
 
+        if(customerName != null && !customerName.isEmpty()   ){
+            return _paymentService.searchByCustomerName(customerName,pageable);
+        }
+
+
+
         return _paymentService.getPayments(pageable);
+
+
     }
-
-//    @GetMapping("")
-//    public Page<Payments> getPayments(
-//            @RequestParam(defaultValue = "0") int page,
-//            @RequestParam(defaultValue = "10") int limit
-//    ) {
-//        Pageable pageable = PageRequest.of(page, limit);
-//
-//        return _paymentService.getPayments(pageable);
-//    }
-
-
 
 }
 

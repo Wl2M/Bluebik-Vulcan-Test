@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import InternTest.BlueBikTest.repositories.PaymentRepositories;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 
+@Transactional(readOnly = true)
 @Service
 public class PaymentService implements IPaymentService {
     private final PaymentRepositories _paymentRepositories;
@@ -17,14 +19,19 @@ public class PaymentService implements IPaymentService {
         this._paymentRepositories = _paymentRepositories;
     }
 
-    @Override
-    @Transactional
-    public Payments getCustomerName(String customerName) {
-        return _paymentRepositories.findByCustomerName(customerName).orElseThrow(()-> new RuntimeException("Customer not found"));
-    }
+//    @Override
+//    @Transactional
+//    public List<Payments> getCustomerName(String customerName) {
+//        return _paymentRepositories.findByCustomerName(customerName);
+//    }
 
     @Override
     public Page<Payments> getPayments(Pageable pageable) {
         return _paymentRepositories.findAll(pageable);
+    }
+
+    @Override
+    public Page<Payments> searchByCustomerName(String customerName , Pageable pageable) {
+        return _paymentRepositories.findByCustomerNameContainingIgnoreCase(customerName,pageable);
     }
 }
