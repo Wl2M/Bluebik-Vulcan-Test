@@ -3,6 +3,7 @@ package InternTest.BlueBikTest.entity;
 
 import InternTest.BlueBikTest.entity.Enum.E_Type;
 import InternTest.BlueBikTest.entity.Enum.E_Status;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,6 +23,7 @@ public class Payments {
 
     @Id
     @Column(name = "id")
+    @JsonProperty("Payment_ID")
     public  String paymentID;
 
     @Column(name="date")

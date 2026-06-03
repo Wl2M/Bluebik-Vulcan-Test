@@ -1,6 +1,7 @@
 package InternTest.BlueBikTest.Controllers;
 
 
+import InternTest.BlueBikTest.Controllers.dto.PaymentDto;
 import InternTest.BlueBikTest.entity.Payments;
 import InternTest.BlueBikTest.interfaces.IPaymentService;
 import org.springframework.data.domain.Page;
@@ -30,11 +31,12 @@ public class PaymentControllers {
     }
 
     @GetMapping("/")
-    public Page<Payments> getPayments(
+    public Page<PaymentDto> getPayments(
             @RequestParam(defaultValue = "date") String sortBy,   //date , amount
             @RequestParam(defaultValue = "asc") String order,     //asc ,desc
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int limit
+
     ) {
         Sort.Direction direction = order.equalsIgnoreCase("desc")
                 ? Sort.Direction.DESC
